@@ -9,19 +9,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- NEW: Confetti Library -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
-    <!-- NEW: Gamified Quest Progress Bar -->
-    <div class="quest-progress-container">
-        <div class="quest-progress-bar" id="questProgressBar"></div>
-        <div class="quest-progress-icon" id="questProgressIcon">🚀</div>
+    <!-- REFINED: Simple Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
     </div>
     
     <nav class="navbar" id="navbar">
-        <!-- (Navbar code is unchanged) -->
         <div class="nav-container">
             <a href="#home" class="nav-logo">Playbook</a>
             <ul class="nav-menu">
@@ -35,9 +31,81 @@
             </ul>
         </div>
     </nav>
+    
+    <!-- NEW: Sidebar Checklist -->
+    <aside class="checklist-sidebar" id="checklistSidebar">
+        <div class="sidebar-header">
+            <h3>Your Action Checklist</h3>
+            <button class="close-sidebar-btn" id="closeSidebarBtn">×</button>
+        </div>
+        <div class="sidebar-content">
+            <div class="checklist-item">
+                <label>
+                    <input type="checkbox" data-task="principles">
+                    <span>Understand the Guiding Principles</span>
+                </label>
+                <div class="quick-links">
+                    <a href="#themes"><i class="fa-solid fa-anchor"></i> View Principles</a>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <label>
+                    <input type="checkbox" data-task="process">
+                    <span>Review the 5-Phase Process</span>
+                </label>
+                <div class="quick-links">
+                     <a href="#process"><i class="fa-solid fa-list-check"></i> See Process</a>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <label>
+                    <input type="checkbox" data-task="timeline">
+                    <span>Internalize the Project Timeline</span>
+                </label>
+                 <div class="quick-links">
+                     <a href="#timeline"><i class="fa-solid fa-calendar-days"></i> Check Timeline</a>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <label>
+                    <input type="checkbox" data-task="tools">
+                    <span>Bookmark Key AI Tools</span>
+                </label>
+                 <div class="quick-links">
+                     <a href="#tools"><i class="fa-solid fa-microchip"></i> Access AI Tools</a>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <label>
+                    <input type="checkbox" data-task="comms">
+                    <span>Download Communication Templates</span>
+                </label>
+                 <div class="quick-links">
+                     <a href="#resources"><i class="fa-solid fa-envelope-open-text"></i> Get Templates</a>
+                </div>
+            </div>
+            <div class="checklist-item">
+                <label>
+                    <input type="checkbox" data-task="kit">
+                    <span>Review Manager's Survival Kit</span>
+                </label>
+                 <div class="quick-links">
+                     <a href="#resources"><i class="fa-solid fa-user-shield"></i> Open Kit</a>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- NEW: Sidebar Toggle Button -->
+    <button class="checklist-toggle-btn" id="checklistToggleBtn">
+        <i class="fa-solid fa-list-check"></i>
+        <span>Checklist</span>
+    </button>
+
 
     <header class="hero-banner" id="home">
-        <!-- (Hero code is unchanged) -->
+        <!-- (Unchanged) -->
         <div class="hero-content">
             <h1>Guide to Making Job Family Changes</h1>
             <p class="subtitle">A comprehensive AI-powered playbook for employee-centered job change management.</p>
@@ -49,37 +117,7 @@
     </header>
 
     <main>
-        <!-- NEW: Change Agent Checklist -->
-        <section id="checklist" class="page-section bg-light">
-            <div class="container">
-                <h2>Your Change Agent Checklist</h2>
-                <p class="section-intro">As you explore the playbook, you'll complete your mission. Watch the items check off automatically!</p>
-                <div class="checklist-grid">
-                    <div class="checklist-item" data-unlock-target="themes">
-                        <i class="fa-regular fa-circle"></i>
-                        <i class="fa-solid fa-circle-check"></i>
-                        <span>Understand the Guiding Principles</span>
-                    </div>
-                    <div class="checklist-item" data-unlock-target="process">
-                        <i class="fa-regular fa-circle"></i>
-                        <i class="fa-solid fa-circle-check"></i>
-                        <span>Review the 5-Phase Process</span>
-                    </div>
-                    <div class="checklist-item" data-unlock-target="timeline">
-                        <i class="fa-regular fa-circle"></i>
-                        <i class="fa-solid fa-circle-check"></i>
-                        <span>Explore the Project Timeline</span>
-                    </div>
-                    <div class="checklist-item" data-unlock-target="resources">
-                        <i class="fa-regular fa-circle"></i>
-                        <i class="fa-solid fa-circle-check"></i>
-                        <span>Equip Yourself with Resources</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- (All other sections from TLDR to Resources are unchanged) -->
+        <!-- All original sections are here. The old checklist and quiz are GONE. -->
         <section id="tldr" class="page-section"> ... </section>
         <section id="welcome" class="page-section bg-light"> ... </section>
         <section id="themes" class="page-section"> ... </section>
@@ -87,33 +125,11 @@
         <section id="timeline" class="page-section"> ... </section>
         <section id="tools" class="page-section bg-light"> ... </section>
         <section id="resources" class="page-section"> ... </section>
-
-        <!-- NEW: Knowledge Checkpoint Quiz -->
-        <section id="knowledge-check" class="page-section">
-            <div class="container">
-                <h2><i class="fa-solid fa-brain"></i> Knowledge Checkpoint</h2>
-                <p class="section-intro">Let's see what you've learned! Select the best answer below.</p>
-                <div class="quiz-container">
-                    <h3 class="quiz-question">What is the most critical principle for ensuring a smooth change process?</h3>
-                    <div class="quiz-answers">
-                        <button class="quiz-answer-btn">Focusing only on data</button>
-                        <button class="quiz-answer-btn" data-correct="true">Empowering managers</button>
-                        <button class="quiz-answer-btn">Keeping information secret</button>
-                        <button class="quiz-answer-btn">Avoiding employee questions</button>
-                    </div>
-                    <div class="quiz-result" id="quizResult"></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="faq" class="page-section bg-light">
-            <!-- (FAQ section is unchanged) -->
-            ...
-        </section>
+        <section id="faq" class="page-section bg-light"> ... </section>
     </main>
 
     <footer class="footer">
-        <!-- (Footer is unchanged) -->
+        <!-- (Unchanged) -->
         ...
     </footer>
 
