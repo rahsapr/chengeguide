@@ -1,147 +1,152 @@
-/* --- Add these new styles to your existing style.css file --- */
+/* --- Add these new styles and remove old quiz/checklist styles --- */
 
-/* --- NEW: Gamified Quest Progress Bar --- */
-.quest-progress-container {
+/* --- REFINED: Simple Progress Bar --- */
+.progress-container {
     width: 100%;
-    height: 10px;
-    background-color: var(--border-color);
+    height: 5px; /* Thinner and more subtle */
+    background-color: transparent;
     position: fixed;
     top: 0;
-    z-index: 1001; /* Above the navbar */
+    z-index: 1001;
 }
-.quest-progress-bar {
+.progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+    background: var(--primary-color);
     width: 0%;
+    border-radius: 0 2px 2px 0;
 }
-.quest-progress-icon {
-    position: absolute;
+
+/* --- NEW: Sidebar Checklist & Toggle Button --- */
+.checklist-toggle-btn {
+    position: fixed;
     top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    font-size: 24px;
-    transition: left 0.1s linear;
-}
-
-/* --- NEW: Change Agent Checklist --- */
-.checklist-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    max-width: 900px;
-    margin: 0 auto;
-}
-.checklist-item {
-    background-color: var(--white-color);
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    font-size: 1.1rem;
-    font-weight: 600;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    transition: all 0.4s ease;
-}
-.checklist-item i {
-    font-size: 1.8rem;
-    margin-right: 15px;
-    transition: transform 0.4s ease;
-}
-.checklist-item .fa-circle { color: var(--border-color); }
-.checklist-item .fa-circle-check { display: none; color: var(--success-color); }
-
-/* Completed state for checklist */
-.checklist-item.completed {
-    background-color: #E3FCEF;
-    color: var(--dark-color);
-}
-.checklist-item.completed .fa-circle { display: none; }
-.checklist-item.completed .fa-circle-check { display: block; transform: scale(1.2); }
-.checklist-item.completed span { text-decoration: line-through; opacity: 0.7; }
-
-/* --- NEW: Knowledge Checkpoint Quiz --- */
-.quiz-container {
-    max-width: 700px;
-    margin: 0 auto;
-    background-color: var(--white-color);
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.08);
-    text-align: center;
-}
-.quiz-question { font-size: 1.5rem; margin-bottom: 30px; }
-.quiz-answers { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-.quiz-answer-btn {
-    padding: 15px;
-    font-size: 1rem;
-    font-weight: 600;
-    border: 2px solid var(--border-color);
-    border-radius: 5px;
-    background-color: transparent;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-.quiz-answer-btn:hover:not(:disabled) {
+    right: 0;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: bottom right;
     background-color: var(--primary-color);
     color: var(--white-color);
-    border-color: var(--primary-color);
-    transform: translateY(-3px);
-}
-.quiz-answer-btn.correct { background-color: var(--success-color); color: white; border-color: var(--success-color); }
-.quiz-answer-btn.incorrect { background-color: #DE350B; color: white; border-color: #DE350B; }
-.quiz-answer-btn:disabled { cursor: not-allowed; opacity: 0.7; }
-.quiz-result {
-    margin-top: 30px;
-    font-size: 1.2rem;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
     font-weight: 600;
+    cursor: pointer;
+    z-index: 1010;
+    border-radius: 8px 8px 0 0;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease;
 }
-.quiz-result.correct { color: var(--success-color); }
-.quiz-result.incorrect { color: #DE350B; }
+.checklist-toggle-btn:hover { background-color: var(--secondary-color); }
+.checklist-toggle-btn i { margin-right: 8px; transform: rotate(90deg); }
 
-/* --- NEW: Enhanced Micro-interactions --- */
-/* Button Shimmer Effect */
-.btn { position: relative; overflow: hidden; }
-.btn::before {
-    content: '';
-    position: absolute;
+.checklist-sidebar {
+    position: fixed;
     top: 0;
-    left: -100%;
+    right: -400px; /* Start off-screen */
+    width: 380px;
+    height: 100%;
+    background-color: var(--white-color);
+    box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+    z-index: 1020;
+    transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    flex-direction: column;
+}
+.checklist-sidebar.active { right: 0; }
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--light-color);
+    border-bottom: 1px solid var(--border-color);
+}
+.sidebar-header h3 { font-size: 1.3rem; margin: 0; }
+
+.close-sidebar-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    font-weight: 300;
+    cursor: pointer;
+    color: var(--text-color);
+    line-height: 1;
+}
+
+.sidebar-content {
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.checklist-item {
+    background-color: var(--light-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+.checklist-item label {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.checklist-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+}
+.checklist-item input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+.quick-links {
+    padding-top: 10px;
+    margin-top: 10px;
+    border-top: 1px solid var(--border-color);
+}
+.quick-links a {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+.quick-links a i { margin-right: 5px; }
+.quick-links a:hover { text-decoration: underline; }
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transition: left 0.6s ease;
+    background: rgba(0,0,0,0.5);
+    z-index: 1015;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
 }
-.btn:hover::before { left: 100%; }
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
 
-/* Card Lift Effect */
+
+/* Adjust body padding and navbar position for the progress bar */
+body {
+    padding-top: 5px;
+}
+.navbar {
+    top: 5px; /* Position it below the new progress bar */
+}
+
+/* Card Lift Effect from previous version (keep this, it's good) */
 .tool-card:hover, .resource-column:hover {
     transform: translateY(-8px);
     box-shadow: 0 8px 30px rgba(0,0,0,0.12);
     transition: all 0.3s ease;
 }
 .resource-column { transition: all 0.3s ease; padding: 20px; border-radius: 8px; }
-
-/* Timeline Glow */
-.timeline-wrapper {
-    position: relative;
-}
-.timeline-wrapper::after {
-    content: '';
-    position: absolute;
-    bottom: 20px; /* Align with scrollbar area */
-    left: 0;
-    right: 0;
-    height: 8px;
-    z-index: 10;
-    pointer-events: none;
-    background: linear-gradient(to right, var(--primary-color), transparent 20%, transparent 80%, var(--primary-color));
-    opacity: 0.2;
-}
-
-/* Adjust top padding of body to account for new progress bar */
-body {
-    padding-top: 10px;
-}
-.navbar {
-    top: 10px; /* Position it below the new progress bar */
-}
