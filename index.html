@@ -12,11 +12,12 @@
 </head>
 <body>
 
-    <!-- REFINED: Simple Progress Bar -->
+    <!-- 1. Refined, Stable Progress Bar -->
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
     
+    <!-- 2. Main Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#home" class="nav-logo">Playbook</a>
@@ -32,7 +33,7 @@
         </div>
     </nav>
     
-    <!-- NEW: Sidebar Checklist -->
+    <!-- 3. NEW: Expandable Sidebar Checklist -->
     <aside class="checklist-sidebar" id="checklistSidebar">
         <div class="sidebar-header">
             <h3>Your Action Checklist</h3>
@@ -95,17 +96,17 @@
             </div>
         </div>
     </aside>
+    <!-- Overlay for when the sidebar is open -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- NEW: Sidebar Toggle Button -->
+    <!-- 4. NEW: Sidebar Toggle Button -->
     <button class="checklist-toggle-btn" id="checklistToggleBtn">
         <i class="fa-solid fa-list-check"></i>
         <span>Checklist</span>
     </button>
 
-
+    <!-- 5. All original page content sections -->
     <header class="hero-banner" id="home">
-        <!-- (Unchanged) -->
         <div class="hero-content">
             <h1>Guide to Making Job Family Changes</h1>
             <p class="subtitle">A comprehensive AI-powered playbook for employee-centered job change management.</p>
@@ -117,7 +118,6 @@
     </header>
 
     <main>
-        <!-- All original sections are here. The old checklist and quiz are GONE. -->
         <section id="tldr" class="page-section"> ... </section>
         <section id="welcome" class="page-section bg-light"> ... </section>
         <section id="themes" class="page-section"> ... </section>
@@ -129,8 +129,7 @@
     </main>
 
     <footer class="footer">
-        <!-- (Unchanged) -->
-        ...
+        <p>© 2024 Your Company, Inc. | This is an internal playbook for HR and Management personnel.</p>
     </footer>
 
     <a href="#home" class="jump-to-top" id="jumpToTopBtn">
